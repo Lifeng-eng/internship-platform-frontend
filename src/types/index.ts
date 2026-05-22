@@ -119,6 +119,33 @@ export interface PageResult<T> {
   totalPages: number;
 }
 
+// 会话
+export interface ConversationVO {
+  id: number;
+  applicationId: number;
+  studentId: number;
+  companyId: number;
+  jobId: number;
+  jobTitle: string;
+  companyName: string;
+  studentName: string;
+  lastMessage: string;
+  lastMessageTime: string;
+  unreadCount: number;
+  createTime: string;
+}
+
+// 消息
+export interface MessageVO {
+  id: number;
+  conversationId: number;
+  senderId: number;
+  senderName: string;
+  content: string;
+  isRead: boolean;
+  sendTime: string;
+}
+
 // API 响应
 export interface ApiResult<T = unknown> {
   code: number;

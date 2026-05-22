@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card, Table, Tag, Button, Space, Modal, Input, message, Empty } from 'antd';
-import { EyeOutlined, CheckOutlined, CloseOutlined, DownloadOutlined } from '@ant-design/icons';
+import { EyeOutlined, CheckOutlined, CloseOutlined, DownloadOutlined, MessageOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import type { ColumnsType } from 'antd/es/table';
 import { useAuthStore } from '../../store/useAuthStore';
@@ -136,6 +136,14 @@ const ApplicationsPage: React.FC = () => {
       width: 240,
       render: (_: unknown, record: ApplicationVO) => (
         <Space>
+          <Button
+            type="link"
+            size="small"
+            icon={<MessageOutlined />}
+            onClick={() => navigate(`/chat?appId=${record.id}`)}
+          >
+            联系学生
+          </Button>
           {record.status === 'PENDING' && (
             <>
               <Button

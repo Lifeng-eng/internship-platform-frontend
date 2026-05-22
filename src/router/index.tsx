@@ -15,6 +15,7 @@ import AdminUsersPage from '../pages/admin/UsersPage';
 import AdminStatsPage from '../pages/admin/StatsPage';
 import AdminProfilePage from '../pages/admin/ProfilePage';
 import NotificationsPage from '../pages/NotificationsPage';
+import ChatPage from '../pages/ChatPage';
 
 // 路由配置
 const router = createBrowserRouter([
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
       { path: 'admin/stats', element: <AdminStatsPage /> },
       { path: 'admin/profile', element: <AdminProfilePage /> },
       { path: 'notifications', element: <NotificationsPage /> },
+      { path: 'chat', element: <ChatPage /> },
     ],
   },
 ]);
