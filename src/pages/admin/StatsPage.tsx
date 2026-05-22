@@ -13,38 +13,38 @@ interface AdminStats {
   // 岗位状态分布
   jobStatusDistribution?: { status: string; count: number }[];
   // 投递结果分布
-  applicationResultDistribution?: { status: string; count: number }[];
+  applicationStatusDistribution?: { status: string; count: number }[];
   // 近7日投递趋势
   applicationTrend?: { date: string; count: number }[];
 }
 
 // 状态颜色和标签
 const jobStatusColors: Record<string, string> = {
-  PENDING: '#faad14',
-  PUBLISHED: '#52c41a',
-  REJECTED: '#ff4d4f',
-  CLOSED: '#d9d9d9',
+  pending: '#faad14',
+  published: '#52c41a',
+  rejected: '#ff4d4f',
+  closed: '#d9d9d9',
 };
 
 const jobStatusLabels: Record<string, string> = {
-  PENDING: '审核中',
-  PUBLISHED: '已发布',
-  REJECTED: '未通过',
-  CLOSED: '已下架',
+  pending: '审核中',
+  published: '已发布',
+  rejected: '未通过',
+  closed: '已下架',
 };
 
 const appStatusColors: Record<string, string> = {
-  PENDING: '#faad14',
-  ACCEPTED: '#52c41a',
-  REJECTED: '#ff4d4f',
-  CANCELLED: '#d9d9d9',
+  pending: '#faad14',
+  accepted: '#52c41a',
+  rejected: '#ff4d4f',
+  cancelled: '#d9d9d9',
 };
 
 const appStatusLabels: Record<string, string> = {
-  PENDING: '待处理',
-  ACCEPTED: '已通过',
-  REJECTED: '已拒绝',
-  CANCELLED: '已撤销',
+  pending: '待处理',
+  accepted: '已通过',
+  rejected: '已拒绝',
+  cancelled: '已撤销',
 };
 
 const StatsPage: React.FC = () => {
@@ -81,7 +81,7 @@ const StatsPage: React.FC = () => {
   }
 
   const jobDistribution = stats?.jobStatusDistribution || [];
-  const appResultDistribution = stats?.applicationResultDistribution || [];
+  const appDistribution = stats?.applicationStatusDistribution || [];
   const trend = stats?.applicationTrend || [];
 
   // 计算饼图各段的百分比和渐变配置
@@ -89,6 +89,7 @@ const StatsPage: React.FC = () => {
     data: { status: string; count: number }[],
     colorMap: Record<string, string>,
   ): string => {
+    if (!Array.isArray(data) || data.length === 0) return 'conic-gradient(#f0f0f0 0% 100%)';
     const total = data.reduce((s, i) => s + i.count, 0);
     if (total === 0) return 'conic-gradient(#f0f0f0 0% 100%)';
     return `conic-gradient(${data
@@ -176,7 +177,7 @@ const StatsPage: React.FC = () => {
         {/* 投递结果分布（饼图） */}
         <Col xs={24} lg={8}>
           <Card title="投递结果分布">
-            {appResultDistribution.length === 0 ? (
+            {appDistribution.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '40px 0', color: '#999' }}>暂无数据</div>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20, padding: '10px 0' }}>
@@ -185,13 +186,13 @@ const StatsPage: React.FC = () => {
                     width: 150,
                     height: 150,
                     borderRadius: '50%',
-                    background: buildConicGradient(appResultDistribution, appStatusColors),
+                    background: buildConicGradient(appDistribution, appStatusColors),
                     boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   }}
                 />
                 <div style={{ width: '100%' }}>
-                  {appResultDistribution.map((item, index) => {
-                    const total = appResultDistribution.reduce((s, i) => s + i.count, 0);
+                  {appDistribution.map((item, index) => {
+                    const total = appDistribution.reduce((s, i) => s + i.count, 0);
                     const pct = total > 0 ? ((item.count / total) * 100).toFixed(1) : '0';
                     return (
                       <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: 6 }}>

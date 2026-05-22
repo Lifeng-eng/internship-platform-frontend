@@ -11,7 +11,7 @@ import { listNotifications, markRead, markAllRead } from '../api/notifications';
 import { useAuthStore } from '../store/useAuthStore';
 import type { Notification } from '../types';
 
-const { Title, Text } = Typography;
+const { Title, Text, Paragraph } = Typography;
 
 /** 通知类型对应的显示配置 */
 const TYPE_CONFIG: Record<string, { label: string; color: string; icon: React.ReactNode }> = {
