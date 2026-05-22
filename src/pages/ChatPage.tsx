@@ -3,7 +3,6 @@ import { useSearchParams } from 'react-router-dom';
 import { Card, List, Input, Button, Empty, Spin, Badge, Typography, message } from 'antd';
 import { SendOutlined, MessageOutlined, UserOutlined } from '@ant-design/icons';
 import { Client } from '@stomp/stompjs';
-import SockJS from 'sockjs-client';
 import { listConversations, listMessages, markConversationRead, getOrCreateConversation } from '../api/chat';
 import { useAuthStore } from '../store/useAuthStore';
 import type { ConversationVO, MessageVO } from '../types';
@@ -65,7 +64,7 @@ const ChatPage: React.FC = () => {
     if (!accessToken) return;
 
     const client = new Client({
-      webSocketFactory: () => new SockJS('http://localhost:8080/ws'),
+      brokerURL: 'ws://localhost:8080/ws',
       connectHeaders: { Authorization: `Bearer ${accessToken}` },
       debug: () => {},
       reconnectDelay: 5000,
