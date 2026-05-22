@@ -120,6 +120,18 @@ const JobDetailPage: React.FC = () => {
     }
   };
 
+  /** 确认撤销投递 */
+  const showCancelConfirm = () => {
+    if (!job) return;
+    Modal.confirm({
+      title: '确认撤销',
+      content: `确定要撤销对「${job.title}」的投递吗？撤销后可重新投递。`,
+      okText: '确认撤销',
+      cancelText: '取消',
+      onOk: handleCancelApplication,
+    });
+  };
+
   /** 企业：下架岗位 */
   const handleCloseJob = async () => {
     if (!job) return;
@@ -189,7 +201,7 @@ const JobDetailPage: React.FC = () => {
             loading={applying}
             onClick={() => {
               if (action.action === 'apply') handleApply();
-              else if (action.action === 'cancel') handleCancelApplication();
+              else if (action.action === 'cancel') showCancelConfirm();
             }}
             style={isPending ? { borderColor: '#faad14', color: '#faad14' } : {}}
           >
