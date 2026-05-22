@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: #f5f5f5;
+}
+
+.page-container {
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+
+.page-header {
+  background: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1d1d1f;
+}
+
+.page-subtitle {
+  color: #8c8c8c;
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+.stat-card {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1677ff;
+}
+
+.stat-label {
+  color: #8c8c8c;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.job-card {
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+.job-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.recommend-banner {
+  background: linear-gradient(135deg, #e6f4ff, #f0f5ff);
+  border: 1px solid #bae0ff;
+  border-radius: 8px;
+  padding: 16px 24px;
+  margin-bottom: 24px;
+}
+
+.notification-item {
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.notification-item:hover {
+  background: #f5f5f5;
+}
+
+.notification-unread {
+  border-left: 3px solid #1677ff;
+  background: #f0f5ff;
+}
+
+.chart-placeholder {
+  background: #fafafa;
+  border: 1px dashed #d9d9d9;
+  border-radius: 8px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8c8c8c;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.login-card {
+  width: 400px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  overflow: hidden;
+}
+
+.login-header {
+  background: linear-gradient(135deg, #1677ff, #0958d9);
+  color: #fff;
+  padding: 32px;
+  text-align: center;
+}
+
+.login-body {
+  padding: 32px;
+}
