@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Card, List, Input, Button, Empty, Spin, Badge, Typography, message } from 'antd';
+import { Card, List, Input, Button, Empty, Spin, Badge, Typography } from 'antd';
 import { SendOutlined, MessageOutlined, UserOutlined } from '@ant-design/icons';
 import { Client } from '@stomp/stompjs';
 import { listConversations, listMessages, markConversationRead, getOrCreateConversation } from '../api/chat';

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
   Card, List, Button, Tag, Badge, Typography, Spin, Empty,
-  Pagination, Divider, message, Row, Col,
+  Pagination, message, Row, Col,
 } from 'antd';
 import {
   CheckCircleOutlined, BellOutlined, MailOutlined,

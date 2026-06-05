@@ -8,7 +8,6 @@ import { useAuthStore } from '../../store/useAuthStore';
 import {
   getProfile, updateProfile, uploadResume, getResumeInfo, deleteResume, changePassword, downloadResume,
 } from '../../api/profile';
-import type { UploadFile } from 'antd/es/upload/interface';
 import type { RcFile } from 'antd/es/upload';
 
 const { Text } = Typography;
@@ -22,7 +21,7 @@ interface ResumeInfo {
 }
 
 const ProfilePage: React.FC = () => {
-  const { isLoggedIn, user } = useAuthStore();
+  const { isLoggedIn } = useAuthStore();
   const navigate = useNavigate();
 
   // 个人信息表单
@@ -32,7 +31,7 @@ const ProfilePage: React.FC = () => {
 
   // 简历相关
   const [resumeInfo, setResumeInfo] = useState<ResumeInfo | null>(null);
-  const [resumeLoading, setResumeLoading] = useState<boolean>(false);
+  const [resumeLoading, _setResumeLoading] = useState<boolean>(false);
   const [uploading, setUploading] = useState<boolean>(false);
 
   // 修改密码

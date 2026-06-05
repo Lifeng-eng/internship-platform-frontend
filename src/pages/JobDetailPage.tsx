@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import {
-  Card, Row, Col, Button, Tag, Descriptions, Spin, message, Modal,
-  Input, Breadcrumb, Statistic, Typography, Divider, Empty,
+  Card, Row, Col, Button, Tag, Spin, message, Modal,
+  Input, Breadcrumb, Statistic, Typography, Empty,
 } from 'antd';
 import {
   EnvironmentOutlined, DollarOutlined, ClockCircleOutlined,
-  EditOutlined, CloseCircleOutlined, SendOutlined, StopOutlined,
+  EditOutlined, SendOutlined, StopOutlined,
   CheckCircleOutlined, CloseCircleFilled, MessageOutlined,
 } from '@ant-design/icons';
 import { getJobDetail, closeJob } from '../api/jobs';

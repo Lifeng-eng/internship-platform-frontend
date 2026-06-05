@@ -135,11 +135,6 @@ const HomePage: React.FC = () => {
     navigate(`/jobs/${jobId}`);
   };
 
-  /** 获取岗位状态对应的标签颜色 */
-  const getSalaryColor = (_min?: number, _max?: number) => {
-    return 'blue';
-  };
-
   return (
     <div style={{ maxWidth: 1200, margin: '0 auto', padding: '24px 16px' }}>
       {/* 顶部搜索区域 */}
