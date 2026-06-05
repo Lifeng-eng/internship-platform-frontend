@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import {
-  Card, Row, Col, Button, Tag, Descriptions, Spin, message, Modal,
-  Input, Breadcrumb, Statistic, Typography, Divider, Empty,
+  Card, Row, Col, Button, Tag, Spin, message, Modal,
+  Input, Breadcrumb, Statistic, Typography, Empty,
 } from 'antd';
 import {
   EnvironmentOutlined, DollarOutlined, ClockCircleOutlined,
-  EditOutlined, CloseCircleOutlined, SendOutlined, StopOutlined,
-  CheckCircleOutlined, CloseCircleFilled,
+  EditOutlined, SendOutlined, StopOutlined,
+  CheckCircleOutlined, CloseCircleFilled, MessageOutlined,
 } from '@ant-design/icons';
 import { getJobDetail, closeJob } from '../api/jobs';
 import { apply, cancelApplication } from '../api/applications';
@@ -190,6 +190,7 @@ const JobDetailPage: React.FC = () => {
       if (!action) return null;
 
       const isPending = status === 'pending';
+      const hasApplied = status !== 'not_applied';
 
       return (
         <div>
@@ -207,6 +208,19 @@ const JobDetailPage: React.FC = () => {
           >
             {action.label}
           </Button>
+          {/* 已投递后可联系发布者 */}
+          {hasApplied && (
+            <Button
+              type="link"
+              size="large"
+              block
+              icon={<MessageOutlined />}
+              style={{ marginTop: 8 }}
+              onClick={() => navigate(`/chat?appId=${job.applicationId}`)}
+            >
+              联系发布者
+            </Button>
+          )}
           {/* 投递中状态下显示额外提示 */}
           {status === 'pending' && (
             <Text type="warning" style={{ display: 'block', marginTop: 8, textAlign: 'center' }}>

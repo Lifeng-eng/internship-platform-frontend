@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Card, Tabs, Table, Tag, Button, Modal, message, Empty } from 'antd';
+import { Card, Tabs, Table, Tag, Button, Modal, message, Empty, Space } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import type { ColumnsType } from 'antd/es/table';
+import { MessageOutlined } from '@ant-design/icons';
 import { useAuthStore } from '../../store/useAuthStore';
 import type { ApplicationVO } from '../../types';
 import { listApplications, cancelApplication } from '../../api/applications';
@@ -118,22 +119,31 @@ const ApplicationsPage: React.FC = () => {
     {
       title: '操作',
       key: 'action',
-      width: 100,
+      width: 180,
       render: (_: unknown, record: ApplicationVO) => {
-        if (record.status === 'PENDING') {
-          return (
+        return (
+          <Space>
             <Button
               type="link"
-              danger
               size="small"
-              loading={cancellingId === record.id}
-              onClick={() => showCancelConfirm(record.id)}
+              icon={<MessageOutlined />}
+              onClick={() => navigate(`/chat?appId=${record.id}`)}
             >
-              撤销
+              联系企业
             </Button>
-          );
-        }
-        return null;
+            {record.status === 'PENDING' && (
+              <Button
+                type="link"
+                danger
+                size="small"
+                loading={cancellingId === record.id}
+                onClick={() => showCancelConfirm(record.id)}
+              >
+                撤销
+              </Button>
+            )}
+          </Space>
+        );
       },
     },
   ];

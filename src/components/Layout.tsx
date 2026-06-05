@@ -3,6 +3,7 @@ import { Layout as AntLayout, Button, Space, Badge, Dropdown, message } from 'an
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
 import { getUnreadCount } from '../api/notifications';
+import { getUnreadChatCount } from '../api/chat';
 
 const { Header, Content, Footer } = AntLayout;
 
@@ -12,6 +13,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   const location = useLocation();
   const { user, clearAuth } = useAuthStore();
   const [unreadCount, setUnreadCount] = useState(0);
+  const [chatUnreadCount, setChatUnreadCount] = useState(0);
 
   const fetchUnread = useCallback(async () => {
     if (!user) return;
@@ -25,14 +27,28 @@ export default function Layout({ children }: { children: ReactNode }) {
     }
   }, [user]);
 
+  const fetchChatUnread = useCallback(async () => {
+    if (!user || user.role === 'admin') return;
+    try {
+      const res = await getUnreadChatCount();
+      if (res.data.code === 200 && res.data.data) {
+        setChatUnreadCount(res.data.data.count);
+      }
+    } catch {
+      // 静默处理
+    }
+  }, [user]);
+
   useEffect(() => {
     fetchUnread();
-  }, [fetchUnread]);
+    fetchChatUnread();
+  }, [fetchUnread, fetchChatUnread]);
 
   // 路由变化时刷新未读数（用户从通知页返回后）
   useEffect(() => {
     fetchUnread();
-  }, [location.pathname, fetchUnread]);
+    fetchChatUnread();
+  }, [location.pathname, fetchUnread, fetchChatUnread]);
 
   // 退出登录
   const handleLogout = () => {
@@ -104,6 +120,13 @@ export default function Layout({ children }: { children: ReactNode }) {
           <Badge count={unreadCount} overflowCount={99}>
             <Button type="link" onClick={() => navigate('/notifications')}>通知</Button>
           </Badge>
+
+          {/* 消息（仅学生和企业） */}
+          {user && user.role !== 'admin' && (
+            <Badge count={chatUnreadCount} overflowCount={99}>
+              <Button type="link" onClick={() => navigate('/chat')}>消息</Button>
+            </Badge>
+          )}
 
           {/* 用户区域 */}
           {user ? (

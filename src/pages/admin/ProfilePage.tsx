@@ -62,10 +62,10 @@ const ProfilePage: React.FC = () => {
     <Card title="个人信息" loading={loading} style={{ maxWidth: 700 }}>
       <Descriptions column={1} bordered size="middle" style={{ marginBottom: 24 }}>
         <Descriptions.Item label="用户 ID">
-          {profile?.id ?? user?.id ?? '-'}
+          {(profile?.id as React.ReactNode) ?? (user?.id as React.ReactNode) ?? '-'}
         </Descriptions.Item>
         <Descriptions.Item label="用户名">
-          {profile?.username ?? user?.name ?? '-'}
+          {(profile?.username as React.ReactNode) ?? (user?.name as React.ReactNode) ?? '-'}
         </Descriptions.Item>
         <Descriptions.Item label="角色">
           管理员

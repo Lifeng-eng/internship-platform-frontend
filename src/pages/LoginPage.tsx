@@ -46,7 +46,7 @@ const LoginPage: React.FC = () => {
         const { accessToken, refreshToken, id, role: userRole, name, mustChangePassword } = result.data;
 
         // 将用户信息存入 auth store
-        setAuth({ id, name, role: userRole }, accessToken, refreshToken);
+        setAuth({ id, name, role: userRole as 'student' | 'company' | 'admin' }, accessToken, refreshToken);
 
         // 管理员首次登录需改密
         if (mustChangePassword === 1 || result.code === 4003) {

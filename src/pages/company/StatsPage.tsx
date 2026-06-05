@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Row, Col, Statistic, Tag, Spin } from 'antd';
+import { Card, Row, Col, Statistic, Spin } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../store/useAuthStore';
 import { getCompanyStats } from '../../api/profile';
